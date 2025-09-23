@@ -75,17 +75,6 @@ schedule:
   - cron: "0 19 * * *" # 7 PM UTC
 ```
 
-## Warning
-
-This project is **for educational purposes** to demonstrate that:
-
-1. GitHub activity doesn't reflect a developer's skills
-2. A developer can be excellent without pushing to public GitHub
-3. A lot of professional code is on GitLab, Bitbucket or private
-4. Metrics can be easily manipulated
-
-**Use this project to raise awareness, not to deceive.**
-
 ---
 
 **PS:** If a recruiter reads this, I hope you'll judge candidates on their real skills, not on green squares.
