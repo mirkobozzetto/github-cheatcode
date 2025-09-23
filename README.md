@@ -86,34 +86,8 @@ This project is **for educational purposes** to demonstrate that:
 
 **Use this project to raise awareness, not to deceive.**
 
-## The real solution
-
-Instead of judging on GitHub activity:
-
-- Look at **code quality**, not quantity
-- Evaluate real **technical skills**
-- Consider **professional experience**
-- Test with **practical exercises**
-
-## Contribution
-
-PRs are welcome! Some ideas:
-
-- Support for other platforms (GitLab, Bitbucket)
-- Graphical interface
-- More sophisticated commit patterns
-- "Fake" but realistic code generation
-
-## License
-
-MIT - Do whatever you want with it, but use it ethically.
-
 ---
 
 **PS:** If a recruiter reads this, I hope you'll judge candidates on their real skills, not on green squares.
 
 **PPS:** For developers: your value isn't measured in commits. Some of the best developers I know have almost empty GitHubs because they work on proprietary code.
-
----
-
-_Created with love (and a bit of irony) to demonstrate the hypocrisy of "GitHub activity shaming"_
