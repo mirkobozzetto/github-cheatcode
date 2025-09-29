@@ -29,7 +29,7 @@ if not os.path.exists('counter.txt'):
     subprocess.run(['git', 'add', 'counter.txt'], check=True)
     subprocess.run(['git', 'commit', '-m', 'Init'], check=True)
 
-days = int(sys.argv[1]) if len(sys.argv) > 1 else 365
+days = int(sys.argv[1]) if len(sys.argv) > 1 else 1095
 start_date = datetime.now() - timedelta(days=days)
 
 for day in range(days):
