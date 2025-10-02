@@ -18,8 +18,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --local user.email "${{ secrets.GIT_USER_EMAIL || 'bozzettomirko88@gmail.com' }}"
-          git config --local user.name "${{ secrets.GIT_USER_NAME || 'Mirko Bozzetto' }}"
+          git config --local user.email "bozzettomirko88@gmail.com"
+          git config --local user.name "Mirko Bozzetto"
 
       - name: Update counter
         run: |
