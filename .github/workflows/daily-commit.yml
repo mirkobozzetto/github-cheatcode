@@ -2,10 +2,8 @@ name: Daily Commit
 
 on:
   schedule:
-    # S'exécute tous les jours à 12h55 UTC (14h55 Paris été / 13h55 Paris hiver)
-    - cron: '55 12 * * *'
+    - cron: "55 12 * * *"
 
-  # Permet de lancer manuellement depuis GitHub
   workflow_dispatch:
 
 jobs:
@@ -13,64 +11,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        # Important pour pouvoir pusher
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Configure Git
-      run: |
-        git config --local user.email "${{ secrets.GIT_USER_EMAIL || '88030569+mirkobozzetto@users.noreply.github.com' }}"
-        git config --local user.name "${{ secrets.GIT_USER_NAME || 'Mirko Bozzetto' }}"
+      - name: Configure Git
+        run: |
+          git config --local user.email "${{ secrets.GIT_USER_EMAIL || 'bozzettomirko88@gmail.com' }}"
+          git config --local user.name "${{ secrets.GIT_USER_NAME || 'Mirko Bozzetto' }}"
 
-    - name: Update counter
-      run: |
-        # Lire le compteur actuel
-        if [ -f counter.txt ]; then
-          COUNTER=$(cat counter.txt)
-        else
-          COUNTER=0
-        fi
+      - name: Update counter
+        run: |
+          if [ -f counter.txt ]; then
+            COUNTER=$(cat counter.txt)
+          else
+            COUNTER=0
+          fi
+          COUNTER=$((COUNTER + 1))
+          echo $COUNTER > counter.txt
+          echo "Counter updated to: $COUNTER"
 
-        # Incrémenter
-        COUNTER=$((COUNTER + 1))
+      - name: Generate commit message
+        id: commit_msg
+        run: |
+          MESSAGES=(
+            "Update daily progress"
+            "Increment counter"
+            "Daily update"
+            "Update metrics"
+            "Progress update"
+            "Update tracker"
+            "Daily commit"
+            "Update statistics"
+            "Routine update"
+            "Update count"
+          )
+          RANDOM_INDEX=$((RANDOM % ${#MESSAGES[@]}))
+          MESSAGE="${MESSAGES[$RANDOM_INDEX]}"
+          DATE=$(date +"%Y-%m-%d")
+          FINAL_MESSAGE="$MESSAGE - $DATE"
+          echo "message=$FINAL_MESSAGE" >> $GITHUB_OUTPUT
 
-        # Sauvegarder
-        echo $COUNTER > counter.txt
-
-        # Afficher pour les logs
-        echo "Counter updated to: $COUNTER"
-
-    - name: Generate commit message
-      id: commit_msg
-      run: |
-        # Messages variés pour sembler naturel
-        MESSAGES=(
-          "Update daily progress"
-          "Increment counter"
-          "Daily update"
-          "Update metrics"
-          "Progress update"
-          "Update tracker"
-          "Daily commit"
-          "Update statistics"
-          "Routine update"
-          "Update count"
-        )
-
-        # Sélectionner un message aléatoire
-        RANDOM_INDEX=$((RANDOM % ${#MESSAGES[@]}))
-        MESSAGE="${MESSAGES[$RANDOM_INDEX]}"
-
-        # Ajouter la date
-        DATE=$(date +"%Y-%m-%d")
-        FINAL_MESSAGE="$MESSAGE - $DATE"
-
-        echo "message=$FINAL_MESSAGE" >> $GITHUB_OUTPUT
-
-    - name: Commit and push
-      run: |
-        git add counter.txt
-        git commit -m "${{ steps.commit_msg.outputs.message }}" || echo "No changes to commit"
-        git push || echo "Nothing to push"
+      - name: Commit and push
+        run: |
+          git add counter.txt
+          git commit -m "${{ steps.commit_msg.outputs.message }}" || echo "No changes to commit"
+          git push || echo "Nothing to push"
